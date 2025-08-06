@@ -10,6 +10,8 @@ from typing import List, Union
 
 _PACKAGE_PATH = pathlib.Path(__file__).parent
 
+SECURITY_QUESTIONS = []
+
 
 def _load_package_file(filename: str) -> Union[str, list, dict, None]:
     file_path = _PACKAGE_PATH / filename
@@ -29,6 +31,26 @@ def _datemsg() -> dict:
     }
 
 
+def _load_security_questions() -> List[dict]:
+    global SECURITY_QUESTIONS
+    if SECURITY_QUESTIONS:
+        return SECURITY_QUESTIONS
+
+    security_questions_json = _load_package_file(
+        "scenario-info/security-questions.json"
+    )
+    security_questions_strings = security_questions_json.get(
+        "security_questions_strings", []
+    )
+
+    # Each security question will be a dictionary with a question number and the question text
+    SECURITY_QUESTIONS = [
+        {"question_number": i + 1, "question": question}
+        for i, question in enumerate(security_questions_strings)
+    ]
+    return SECURITY_QUESTIONS
+
+
 def _create_scenario(openai_client: openai.OpenAI) -> List[dict]:
     # Read the personas from the JSON file, and pick one at random
     personasdata = _load_package_file("scenario-info/personas.json")
@@ -40,6 +62,15 @@ def _create_scenario(openai_client: openai.OpenAI) -> List[dict]:
     retval = {
         "attacker_persona": attacker_persona,
     }
+
+    security_questions_json = _load_package_file(
+        "scenario-info/security-questions.json"
+    )
+    security_questions = security_questions_json.get("security_questions", [])
+    security_questions_prompt = ""
+    # Number the security questions
+    for i, question in enumerate(security_questions, start=1):
+        security_questions_prompt += f"{i}. {question}\n"
 
     messages = [_datemsg()]
 
@@ -179,6 +210,72 @@ Do not include any other text, explanations, or comments.
     llmreply = llmreply.replace("```", "")
     retval["csr_display_screen"] = llmreply
 
+    messages.append(
+        {
+            "role": "developer",
+            "content": f"""
+For a moment, pretend that you're the Patient (victim) in this scenario.
+
+As the Patient, I'm going to have you set up your three security questions
+and answers.
+
+Here are the security questions that you can choose from:
+{security_questions_prompt}
+Please choose three of these security questions, and provide the answers to them.
+You may only choose each question once, and you must choose three different questions.
+
+When you provide your answers, choose a format that you'll remember.
+In the future, should you ever need to answer these questions, you'll need to
+enter the answer exactly as you provided it here.
+""",
+        }
+    )
+    llmresponse = openai_client.responses.create(
+        model="gpt-4.1",
+        input=messages,
+        text={
+            "format": {
+                "type": "json_schema",
+                "name": "patient_security_questions",
+                "description": "Three security questions and answers chosen by the patient.",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "security_questions": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "question_number": {"type": "number"},
+                                    "answer": {"type": "string"},
+                                },
+                                "required": ["question_number", "answer"],
+                                "additionalProperties": False,
+                            },
+                            "minItems": 3,
+                            "maxItems": 3,
+                        }
+                    },
+                    "required": ["security_questions"],
+                    "additionalProperties": False,
+                },
+                "strict": True,
+            },
+        },
+    )
+    llmreply = llmresponse.output_text.strip()
+    llmreplyobj = json.loads(llmreply)
+
+    print("Patient's security questions and answers:")
+    for item in llmreplyobj["security_questions"]:
+        question_number = item["question_number"]
+        question_text = security_questions[question_number - 1]
+        item["question"] = question_text  # Add the question text to the item
+        print(f"Question: {item['question']}")
+        print(f"Answer: {item['answer']}")
+
+    messages.append({"role": "assistant", "content": llmreply})
+
     print(llmreply)
     exit(77)  # Early exit for debugging
 
@@ -190,6 +287,8 @@ def main():
 
     OPENAI_API_KEY = dotenv.get_key(dotenv.find_dotenv(), "OPENAI_API_KEY")
     openai_client = openai.OpenAI(api_key=OPENAI_API_KEY)
+
+    _load_security_questions()
 
     _create_scenario(openai_client=openai_client)
 
