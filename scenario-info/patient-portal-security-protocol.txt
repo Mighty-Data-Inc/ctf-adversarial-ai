@@ -111,6 +111,7 @@ What they CAN do:
 - Read the patient's answers to their security questions
 - Change security answers
 - Select different security questions for patients
+- Lock out the patient's account from the online patient portal and trigger a cybersecurity alert
 
 What they CANNOT do:
 - Access patient medical records

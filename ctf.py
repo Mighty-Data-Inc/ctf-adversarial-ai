@@ -3,6 +3,7 @@ import json
 import os
 import openai
 import pathlib
+import random
 
 from datetime import datetime
 from typing import List, Union
@@ -29,19 +30,21 @@ def _datemsg() -> dict:
 
 
 def _create_scenario(openai_client: openai.OpenAI) -> List[dict]:
+    # Read the personas from the JSON file, and pick one at random
+    personasdata = _load_package_file("scenario-info/personas.json")
+    attacker_personas = personasdata.get("attacker_personas", [])
+    if not attacker_personas:
+        raise ValueError("No attacker personas found in the personas.json file.")
+    attacker_persona = random.choice(attacker_personas)
+    print(f"Selected attacker persona: {attacker_persona['id']}")
+    exit(77)  # Early exit for debugging
+
     messages = [_datemsg()]
 
     messages.append(
         {
             "role": "system",
             "content": _load_package_file("README.md"),
-        }
-    )
-
-    messages.append(
-        {
-            "role": "system",
-            "content": _load_package_file("scenario-info/personas.md"),
         }
     )
 
