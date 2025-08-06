@@ -14,7 +14,7 @@ The simulation takes place at **Saint Sinai Medical Center**, a fictional hospit
 
 ### The Challenge
 
-Patients need to access their medical records through secure online accounts. While the initial account creation process is robust (email verification, one-time passwords, security questions), problems arise when legitimate users:
+Patients need to access their medical records through the hospital's secure patient portal. While the initial account creation process is robust (email verification, one-time passwords, security questions), problems arise when legitimate users:
 - Lose access to their registered email account
 - Forget their password
 - Cannot correctly answer security questions

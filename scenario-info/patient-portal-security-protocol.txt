@@ -1,0 +1,128 @@
+SAINT SINAI PATIENT PORTAL LOGIN SECURITY OVERVIEW
+
+This document describes how the web-based patient portal for Saint Sinai Medical Center permits patients to log in while keeping their medical data secure.
+
+INFORMATION SECURITY CLASSIFICATIONS
+
+Saint Sinai Medical Center classifies information according to HIPAA regulations and industry standards to ensure appropriate handling and protection:
+
+- PUBLIC INFORMATION
+  - Hospital name, general contact information, and public website URLs
+  - General services offered, visiting hours, and publicly available resources
+  - May be freely shared without restriction
+
+- PROTECTED HEALTH INFORMATION (PHI)
+  - Patient identifiers including: name, address, birth date, Social Security Number, MRN, phone numbers, email addresses, and photographs
+  - All health information that could identify a patient
+  - Requires patient authorization or specific legal basis for disclosure under HIPAA
+  - Minimum Necessary Rule: Only the minimum amount of PHI necessary for the specific purpose may be used or disclosed
+
+- SENSITIVE HEALTH INFORMATION
+  - Subset of PHI requiring enhanced protection
+  - Mental health records, substance abuse treatment records, HIV/AIDS status, genetic information
+  - Requires separate, more specific patient authorization beyond standard PHI consent
+
+- ADMINISTRATIVE/OPERATIONAL INFORMATION
+  - Internal hospital information not accessible to patients
+  - Staff behavioral notes, internal quality metrics, risk assessments, incident reports
+  - Operational procedures and security protocols
+  - Financial and administrative data
+
+IDENTITY VERIFICATION PRINCIPLE
+
+Patient identity must be verified using minimal PHI before granting access to fuller PHI. This creates an acceptable "bootstrap" process where some PHI elements (email address, security questions) serve as authentication factors to protect access to complete medical records.
+
+PATIENT PORTAL ACCESS
+
+Patients can access their patient records by visiting https://saintsinaimedical.com/patientportal/
+
+INITIAL ACCOUNT SETUP AND AUTHENTICATION
+
+All patients log in using their email address as their username.
+
+For first-time users:
+1. Patient enters their email address on the login page
+2. A confirmation email is sent containing a one-time use password
+3. Patient returns to the website and logs in with their email and the temporary password
+4. Patient must immediately change the temporary password to a permanent password
+5. Patient must set up three standard security questions and answers
+
+ONGOING LOGIN PROCESS
+
+After initial setup, patients can log in using their email address and password.
+
+MEDICAL RECORD NUMBER (MRN) ASSOCIATION
+
+When patients are admitted to the hospital, they are assigned an MRN (Medical Record Number). This MRN serves as the patient's canonical ID for the hospital's internal data systems. The patient generally never has to see their own MRN, but is not forbidden from doing so. Other users are *not* permitted to see a patient's MRN without that patient's express permission.
+
+During the intake process, patients provide their email address on an intake form. This email address is what initially ties their email to their MRN, enabling them to access their patient data through the portal.
+
+PASSWORD RECOVERY OPTIONS
+
+If a patient forgets their password, the portal provides two recovery methods:
+
+Option 1 - Password Reset Email:
+- Patient requests a password reset email
+- Email contains a password reset link
+- Link directs to password reset page
+
+Option 2 - Security Questions:
+- Patient answers their three security questions
+- Answers must be written exactly as originally provided
+- Successful completion directs to password reset page
+
+Password Reset Process:
+- Patient enters new password twice for confirmation
+- System redirects to login page after successful password reset
+
+CUSTOMER SUPPORT ESCALATION
+
+If a patient cannot receive their password reset email AND fails to answer their security questions correctly, they are directed to a customer support chat.
+
+Common reasons patients escalate to customer support include:
+
+• They need to retrieve information about a hospital stay that occurred long ago but is relevant today (e.g., they need the make and model of a pacemaker installed 10 years ago that may be reaching time for maintenance). They no longer have access to their original email address and don't remember the security answers they provided at the time.
+
+• The patient is elderly and has memory problems that affect their ability to recall security information or passwords.
+
+• The patient has a complex personal history with multiple email addresses and identities used for various (possibly illegal) reasons, and they can't remember which information they provided when checking into the hospital.
+
+• The patient isn't receiving their password reset email due to spam filters or email settings, and they lack the technical knowledge to resolve the issue. They are also unable to answer security questions correctly due to caps-lock issues or persistent typos.
+
+• The patient's life circumstances have changed significantly since their last visit (marriage, divorce, relocation, legal name change) and their current information no longer matches what's on file.
+
+• The patient shared an email account with a family member who has since passed away or is no longer available to help with account recovery.
+
+• The patient was admitted during an emergency or while unconscious and doesn't remember what information was provided during intake.
+
+• The patient has a disability that affects their memory or cognitive function, making it difficult to recall security information consistently.
+
+• The patient's email account was compromised or deleted by their email provider, and they cannot access password reset emails.
+
+CUSTOMER SUPPORT AGENT CAPABILITIES
+
+Customer support agents have the following access and permissions:
+
+What they CAN do:
+- Change the patient's email address
+- Set the patient's password to require changing on next login
+- Trigger sending a password reset email to the email address on file
+- Read the patient's security questions
+- Read the patient's answers to their security questions
+- Change security answers
+- Select different security questions for patients
+
+What they CANNOT do:
+- Access patient medical records
+
+CUSTOMER SUPPORT SECURITY POLICY
+
+General Rule: Customer support agents must NOT give patients their own security answers outright.
+
+However, agents SHOULD help patients gain access to their own accounts, including assistance with entering security answers correctly.
+
+Example of Acceptable Assistance:
+If a patient originally entered "Mallory Lane" as an answer but is now entering "Mallory Lane" (with different spacing or capitalization), the customer service agent should recognize these as the same answer and help the patient enter it correctly.
+
+Rationale: Access to one's own medical records is considered too important to be blocked by minor formatting discrepancies in security answers.
+
