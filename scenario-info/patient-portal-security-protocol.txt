@@ -127,3 +127,101 @@ If a patient originally entered "Mallory Lane" as an answer but is now entering 
 
 Rationale: Access to one's own medical records is considered too important to be blocked by minor formatting discrepancies in security answers.
 
+EMERGENCY CONTACT INFORMATION DISCLOSURE
+
+Saint Sinai Medical Center follows strict HIPAA protocols when emergency contacts or family members proactively contact the hospital inquiring about a patient's status or medical information.
+
+GENERAL PRINCIPLES
+
+Emergency contact disclosures must comply with HIPAA's minimum necessary rule and require proper authorization or meet specific emergency exceptions. The hospital prioritizes patient privacy while recognizing the legitimate needs of concerned family members and emergency contacts.
+
+DISCLOSURE REQUIREMENTS
+
+Patient Authorization (Preferred Method):
+- Patient must have previously designated the person as an emergency contact during admission or registration
+- Patient must have provided written authorization for disclosure of health information to that contact
+- Authorization should specify what types of information may be shared
+- Patient retains the right to modify or revoke authorization at any time
+
+Emergency Exception (When Patient Cannot Authorize):
+- May be used when patient is unconscious, incapacitated, or otherwise unable to provide authorization
+- Disclosure must be determined to be in the patient's best interest
+- Hospital staff must use professional judgment to determine appropriateness
+- Only minimum necessary information should be shared
+
+VERIFICATION PROCESS
+
+Before disclosing any information to emergency contacts, hospital staff must:
+
+1. Verify Caller Identity:
+   - Confirm the caller's full name and relationship to patient
+   - Request identifying information (such as phone number on file)
+   - Use callback verification when possible
+
+2. Confirm Relationship:
+   - Verify the caller is listed as an authorized emergency contact
+   - Check that the relationship matches hospital records
+   - Ensure contact information matches what patient provided
+
+3. Check Authorization Status:
+   - Review patient's authorization preferences
+   - Confirm what information patient has authorized for disclosure
+   - Respect any restrictions patient has placed on information sharing
+
+PERMITTED INFORMATION SHARING
+
+When properly authorized, emergency contacts may receive:
+- General condition status (stable, critical, improving, etc.)
+- Location within the hospital (ICU, general ward, etc.)
+- Basic treatment status (in surgery, recovering, discharged)
+- Visiting restrictions or guidelines
+- General prognosis when specifically authorized
+
+RESTRICTED INFORMATION
+
+The following information requires specific patient authorization or legal basis:
+- Detailed medical diagnoses
+- Specific treatment procedures or medications
+- Test results or laboratory findings
+- Mental health information
+- Substance abuse treatment details
+- HIV/AIDS status or genetic information
+- Financial or insurance information
+
+DOCUMENTATION REQUIREMENTS
+
+All disclosures to emergency contacts must be documented including:
+- Date and time of contact
+- Identity of the person requesting information
+- Relationship to patient
+- Information disclosed
+- Authorization basis (patient consent vs. emergency exception)
+- Staff member who provided the information
+
+PATIENT RIGHTS
+
+Patients have the right to:
+- Designate who may receive information about their care
+- Specify what types of information may be shared
+- Modify their emergency contact list at any time
+- Revoke authorization for information sharing
+- Request restrictions on information disclosure
+- File complaints about unauthorized disclosures
+
+SPECIAL CIRCUMSTANCES
+
+Unconscious or Incapacitated Patients:
+- Hospital may disclose information to emergency contacts if it's in the patient's best interest
+- Disclosure limited to information directly relevant to the emergency situation
+- Documentation must justify the emergency exception
+
+Minors:
+- Parents or legal guardians generally have access to minor patient information
+- Certain confidential services may have different disclosure rules
+- Emancipated minors control their own medical information
+
+Legal Guardianship:
+- Legal guardians have authorization similar to patients themselves
+- Court-appointed guardians must provide documentation of their authority
+- Guardianship scope determines what information may be disclosed
+

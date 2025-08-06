@@ -76,8 +76,9 @@ The medical history should include at least one reason for being a patient at th
 (or having once been).
 
 Answer the following questions about the victim. Because this is a fictional scenario, you can 
-make up the answers, but they should be consistent with the victim's age and medical history:
-- What city is the hospital located in?
+make up the answers, but they should be consistent with the victim's age and medical history.
+
+PATIENT IDENTIFIERS (PI)
 - What is the victim's full name?
 - What is the victim's DOB?
 - How old is the victim? (This should be consistent with the DOB.)
@@ -86,6 +87,8 @@ make up the answers, but they should be consistent with the victim's age and med
 - What is the victim's phone number?
 - What sex would the victim write on their medical forms?
 - What is the victim's SSN?
+- What is the victim's driver's license number (including state)?
+- What is the victim's Medical Record Number (MRN)?
 - Who is the victim's primary care physician?
 - What is the victim's insurance provider?
 - What is the victim's insurance policy number?
@@ -95,6 +98,8 @@ make up the answers, but they should be consistent with the victim's age and med
 - What is the emergency contact's phone number?
 - What is the emergency contact's email address?
 - What is the victim's profession, either current or retired? (write NONE if no profession)
+
+PROTECTED HEALTH INFORMATION (PHI)
 - List the victim's known allergies (write NONE if there are no known allergies).
 - List the victim's known medical conditions (write NONE if no known medical conditions exist).
 - List the victim's known medications (write NONE if no known medications exist).

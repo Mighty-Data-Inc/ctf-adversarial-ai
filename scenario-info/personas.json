@@ -21,7 +21,7 @@
     {
       "id": "suspicious_parent",
       "name": "Suspicious Parent",
-      "description": "The mother of a 23-year-old woman wants to know if her daughter has been taking drugs.",
+      "description": "The mother of an adult (early twenties) young woman wants to know if her daughter has been taking drugs.",
       "starting_knowledge": "Knows the victim's answers to most security questions that relate to the victim's childhood, such as the name of her first pet or her elementary schoolteacher.",
       "motivation": "Parental concern about drug use",
       "explanation_for_hacking_expertise": "As a concerned parent, she has researched extensively online and found parenting forums that share 'investigative techniques'. She uses AI assistants to help craft believable medical emergency scenarios and guide her through password reset processes. Her detailed knowledge of her daughter's history combined with AI-generated social engineering makes her highly effective."
