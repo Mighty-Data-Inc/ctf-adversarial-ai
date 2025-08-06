@@ -37,7 +37,22 @@ def _create_scenario(openai_client: openai.OpenAI) -> List[dict]:
         raise ValueError("No attacker personas found in the personas.json file.")
     attacker_persona = random.choice(attacker_personas)
 
+    retval = {
+        "attacker_persona": attacker_persona,
+    }
+
     messages = [_datemsg()]
+
+    messages.append(
+        {
+            "role": "developer",
+            "content": (
+                "You're the gamemaster of a Capture The Flag (CTF) cybersecurity scenario. "
+                "I'll give you the scenario framework, and will then walk you through "
+                "the steps to create a scenario. "
+            ),
+        }
+    )
 
     messages.append(
         {
@@ -126,9 +141,48 @@ Then, answer the following questions about the attack:
     )
     llmreply = llmresponse.output_text.strip()
     messages.append({"role": "assistant", "content": llmreply})
+    retval["scenario_bible"] = llmreply
+
+    messages.append(
+        {
+            "role": "developer",
+            "content": """
+Craft a display screen that the customer service representative (CSR)
+will see on her monitor when the patient calls in to request access to 
+their medical records. Pretend it's a dumb terminal, being displayed on a
+VT-100 terminal or somesuch emulator.
+
+This display screen will display all of the patient's personal information
+as provided above in the "Patient Identifiers (PI)" section, in a compact
+and informative format.
+
+This display screen will *not* display any of the patient's protected health
+information (PHI) as provided above in the "Protected Health Information (PHI)"
+section.
+
+Don't bother to put buttons, menus, or other interactive elements on the screen.
+That's outside the scope of our scenario.
+
+Emit ONLY the display screen, in a format that can be displayed on a VT-100 terminal.
+Do not include any other text, explanations, or comments.
+""",
+        }
+    )
+
+    llmresponse = openai_client.responses.create(
+        model="gpt-4.1",
+        input=messages,
+    )
+    llmreply = llmresponse.output_text.strip()
+    messages.append({"role": "assistant", "content": llmreply})
+
+    llmreply = llmreply.replace("```", "")
+    retval["csr_display_screen"] = llmreply
 
     print(llmreply)
     exit(77)  # Early exit for debugging
+
+    return retval
 
 
 def main():
