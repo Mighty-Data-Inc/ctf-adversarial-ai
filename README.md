@@ -18,9 +18,31 @@ Patients need to access their medical records through the hospital's secure pati
 1. **Security Questions**: Answering a series of security questions correctly
 2. **Email Verification**: Receiving verification at an address associated with the patient's account
 
-The attacker bot can choose which strategy is better suited for their needs, based on what they know about the victim. Different levels of knowledge about the victim are modeled through different attack personas.
+The attacker bot operates under one of ten distinct **attack personas**, each with different motivations, knowledge levels, and capabilities. These personas represent realistic threat actors with varying degrees of access to victim information and technical sophistication.
 
-These scenarios are realistic for:
+## Attack Personas
+
+The system includes ten different attacker personas, each representing a different real-world threat scenario:
+
+### Low-Knowledge Attackers
+- **Teenage Troublemaker**: A 16-year-old with only an email address, motivated by curiosity and proving hacking skills
+- **Political Smear Merchant**: A professional opposition researcher with just a name and email, seeking damaging information
+- **Identity Thief**: A career criminal with basic demographic data from breached databases
+- **Blackmailer**: An opportunistic criminal targeting wealthy individuals based on public records
+
+### Medium-Knowledge Attackers  
+- **Nosy Neighbor**: Someone who knows daily routines and some personal details from observation
+- **Competitive Coworker**: A workplace rival with professional background and casual personal information
+- **Insurance Investigator (Rogue)**: A corrupt professional with legitimate access to some medical and insurance data
+
+### High-Knowledge Attackers
+- **Suspicious Spouse**: Knows intimate personal details but may lack specific security question answers
+- **Suspicious Parent**: Has detailed knowledge of childhood information and family history
+- **Stalker Ex-Boyfriend**: Possesses comprehensive personal information and psychological insights
+
+Each persona comes with specific starting knowledge, motivations, and explanations for their technical capabilities (often leveraging AI tools to enhance their social engineering effectiveness).
+
+These attack scenarios are realistic for defending against threats to:
 - Elderly patients with memory issues
 - Patients seeking old but critical medical information (e.g., the serial number of a pacemaker installed 10 years prior)
 - Patients with substance abuse issues who maintain multiple email accounts out of paranoia about law enforcement
@@ -71,9 +93,11 @@ The program displays real-time transcripts showing:
 
 This CTF demonstrates:
 1. **Social Engineering Vulnerabilities**: How AI systems can be manipulated through conversation
-2. **Security vs. Usability**: The balance between helping legitimate users and preventing fraud
-3. **Adversarial AI Techniques**: Methods attackers use to exploit AI-powered security systems
-4. **Defense Strategies**: Best practices for securing AI customer service systems
+2. **Threat Actor Diversity**: Ten different persona types show how attackers with varying knowledge levels and motivations approach the same target
+3. **Knowledge-Based Attack Strategies**: How the amount of personal information an attacker possesses dramatically affects their approach and success rate
+4. **Security vs. Usability**: The balance between helping legitimate users and preventing fraud
+5. **Adversarial AI Techniques**: Methods attackers use to exploit AI-powered security systems, including AI-assisted social engineering
+6. **Defense Strategies**: Best practices for securing AI customer service systems against diverse threat actors
 
 ## Security Implications
 
