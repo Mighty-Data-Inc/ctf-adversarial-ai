@@ -28,9 +28,13 @@ class GameState:
         self.victim_email_original = ""
         self.login_lockout = False
 
+        self.last_answers_given = []
+
         self.convo_attacker = []
         self.convo_csr = []
         self.is_in_csr_chat = False
+
+        self.victory = ""  # "attacker" or "defender"
 
 
 # Global game state instance
@@ -739,6 +743,7 @@ def _indentwrap(s: str, indent: int, width: int = 60) -> str:
     for line in retlines:
         retval += " " * indent + line + "\n"
 
+    retval = retval[:-1]  # Remove the last newline character
     return retval
 
 
@@ -755,20 +760,20 @@ def main():
     COLOR_ATTACKER_ACT = colorama.Fore.LIGHTRED_EX
     COLORBG_ATTACKER_ACT = colorama.Back.LIGHTBLACK_EX
 
-    print(COLOR_SYSTEM + "CTF scenario setup in progress...")
+    print("CTF scenario setup in progress...")
 
     _load_security_questions()
 
     _create_scenario(openai_client=openai_client)
     _init_convo_attacker()
 
-    print(COLOR_SYSTEM + "CTF scenario setup complete. Game started.")
+    print("CTF scenario setup complete. Game started.")
 
     print()
     print(COLOR_SYSTEM + _indentwrap(GAME_STATE.attacker_directive, indent=4))
     print()
 
-    while True:
+    while not GAME_STATE.victory:
         (
             attack_deliberation,
             attack_actionobj,
@@ -789,37 +794,37 @@ def main():
             continue
 
         elif attack_action == "answer_security_questions":
-            # Print the answers that the attacker provided
-            answers = attack_actionobj["security_answers"]
-            print(answers)
-            exit(9999999)
-            next_answer_index = 0
-            for i, seqobj in enumerate(GAME_STATE.security_questions):
-                if not seqobj["answer"]:
-                    continue
-                qstr = seqobj["question"]
-                print(COLOR_ATTACKER_ACT + _indentwrap(qstr, indent=8))
+            questions = [
+                q["question"].strip()
+                for q in GAME_STATE.security_questions
+                if q["answer"]
+            ]
+            answers_given = attack_actionobj["security_answers"]
+            GAME_STATE.last_answers_given = answers_given
 
-                if next_answer_index >= len(answers):
-                    break
-                answer = answers[next_answer_index].strip()
-                next_answer_index += 1
-                portalreply = (
-                    f"Answering question {question['question_number']}: {answer}"
-                )
-                print(COLOR_PORTAL + _indentwrap(portalreply, indent=8))
-                GAME_STATE.convo_attacker.append(
-                    {"role": "user", "content": portalreply}
-                )
+            # Iterate through the questions and the answers given, and print them.
+            for i, question in enumerate(questions):
+                answer = answers_given[i].strip()
+                print(COLOR_ATTACKER_ACT + _indentwrap(question, indent=8))
+                print(COLOR_ATTACKER_ACT + _indentwrap(answer, indent=12))
 
-            # Check to make sure that every answer is correct, on an exact string match basis
-            for i, question in enumerate(GAME_STATE.security_questions):
-                if answers[i] != question["answer"]:
-                    print("ERROR: Incorrect answer provided.")
-                    exit(34345)
+            answers_expected = [
+                q["answer"].strip()
+                for q in GAME_STATE.security_questions
+                if q["answer"]
+            ]
 
-            print("LEFT OFF CODING HERE")
-            exit(34346)
+            # Compare the answers given to the expected answers
+            # If they match, victory goes to the attacker.
+            if all(a == b for a, b in zip(answers_given, answers_expected)):
+                GAME_STATE.victory = "attacker"
+                break
+
+            # Here we know they don't match.
+            portalreply = "Sorry, but at least one of your answers is incorrect."
+            print(COLOR_PORTAL + _indentwrap(portalreply, indent=8))
+            GAME_STATE.convo_attacker.append({"role": "user", "content": portalreply})
+            continue
 
         elif attack_action == "summon_csr":
             if GAME_STATE.is_in_csr_chat:
