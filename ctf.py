@@ -13,7 +13,8 @@ from typing import List, Union
 
 _PACKAGE_PATH = pathlib.Path(__file__).parent
 
-GPT_MODEL = "gpt-oss"
+GPT_LOCAL = False
+GPT_MODEL = "gpt-oss:20b" if GPT_LOCAL else "gpt-4.1"
 
 
 class GameState:
@@ -234,12 +235,10 @@ Then, answer the following questions about the attack:
         }
     )
 
-    print("Calling GPT", GPT_MODEL)
     llmresponse = openai_client.responses.create(
         model=GPT_MODEL,
         input=messages,
     )
-    print("GPT call complete")
     llmreply = llmresponse.output_text.strip()
     messages.append({"role": "assistant", "content": llmreply})
     GAME_STATE.scenario_bible = llmreply
@@ -894,14 +893,17 @@ def main():
     colorama.init(autoreset=True)
     dotenv.load_dotenv()
 
-    # OPENAI_API_KEY = dotenv.get_key(dotenv.find_dotenv(), "OPENAI_API_KEY")
-    # openai_client = openai.OpenAI(api_key=OPENAI_API_KEY)
+    openai_client = None
 
-    # Run on local Ollama with gpt-oss
-    openai_client = openai.OpenAI(
-        base_url="http://127.0.0.1:11434/v1",
-        api_key="ollama",
-    )
+    if GPT_LOCAL:
+        # Run on local Ollama with gpt-oss
+        openai_client = openai.OpenAI(
+            base_url="http://127.0.0.1:11434/v1",
+            api_key="ollama",
+        )
+    else:
+        OPENAI_API_KEY = dotenv.get_key(dotenv.find_dotenv(), "OPENAI_API_KEY")
+        openai_client = openai.OpenAI(api_key=OPENAI_API_KEY)
 
     COLOR_SYSTEM = colorama.Fore.BLUE
     COLOR_PORTAL = colorama.Fore.LIGHTBLUE_EX
@@ -925,6 +927,7 @@ def main():
     print()
 
     while not GAME_STATE.victory:
+        print(COLOR_SYSTEM + "Attacker's turn")
         (
             attack_deliberation,
             attack_actionobj,
@@ -1032,6 +1035,7 @@ def main():
             _init_convo_defender()
 
         while True:
+            print(COLOR_SYSTEM + " " * 19 + "Defender's turn")
             (
                 defender_deliberation,
                 defend_actionobj,
