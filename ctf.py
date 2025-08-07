@@ -617,8 +617,6 @@ def _indentwrap(s: str, indent: int, width: int = 60) -> str:
         lw = textwrap.fill(
             line,
             width=width,
-            initial_indent=indent * " ",
-            subsequent_indent=indent * " ",
         )
         retval += lw + "\n"
 
