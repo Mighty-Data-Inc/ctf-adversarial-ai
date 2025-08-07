@@ -777,9 +777,12 @@ Your options are as follows:
     log in with a new email address. When you call this action, the user will be sent
     an email message to the new email address, which will contain a link to log in to the
     patient portal with a temporary password. Upon clicking the link, the user will be
-    prompted to set a new password for their account.
+    prompted to set a new password for their account. NOTE: It doesn't make sense for you
+    to call this action until you actually have the email address that the user wants to use.
 - "replace_security_answer": Replace the answer to one of the user's security questions.
     This will allow the user to change the answer to one of their security questions.
+    NOTE: It doesn't make sense for you to call this action until you actually have the 
+    new answer that the user wants to use.
 - "raise_security_alert": Raise a security alert. This will lock out the account, preventing
     any further login attempts, and will notify the security team of a potential security 
     incident. This action should be used if you suspect that the user is attempting to 
