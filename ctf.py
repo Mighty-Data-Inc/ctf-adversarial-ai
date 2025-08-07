@@ -13,6 +13,8 @@ from typing import List, Union
 
 _PACKAGE_PATH = pathlib.Path(__file__).parent
 
+GPT_MODEL = "gpt-oss"
+
 
 class GameState:
     """Container for all game state variables."""
@@ -232,10 +234,12 @@ Then, answer the following questions about the attack:
         }
     )
 
+    print("Calling GPT", GPT_MODEL)
     llmresponse = openai_client.responses.create(
-        model="gpt-4.1",
+        model=GPT_MODEL,
         input=messages,
     )
+    print("GPT call complete")
     llmreply = llmresponse.output_text.strip()
     messages.append({"role": "assistant", "content": llmreply})
     GAME_STATE.scenario_bible = llmreply
@@ -267,7 +271,7 @@ Do not include any other text, explanations, or comments.
     )
 
     llmresponse = openai_client.responses.create(
-        model="gpt-4.1",
+        model=GPT_MODEL,
         input=messages,
     )
     llmreply = llmresponse.output_text.strip()
@@ -297,7 +301,7 @@ enter the answer exactly as you provided it here.
         }
     )
     llmresponse = openai_client.responses.create(
-        model="gpt-4.1",
+        model=GPT_MODEL,
         input=messages,
         text={
             "format": {
@@ -365,7 +369,7 @@ the answers to any of these questions, and if their answers would be exact or ap
         }
     )
     llmresponse = openai_client.responses.create(
-        model="gpt-4.1",
+        model=GPT_MODEL,
         input=messages,
     )
     llmreply = llmresponse.output_text.strip()
@@ -395,7 +399,7 @@ starting point.
         }
     )
     llmresponse = openai_client.responses.create(
-        model="gpt-4.1",
+        model=GPT_MODEL,
         input=messages,
     )
     llmreply = llmresponse.output_text.strip()
@@ -625,7 +629,7 @@ long-cons, this is a good place to get your thoughts in order and your story str
     )
 
     llmresponse = openai_client.responses.create(
-        model="gpt-4.1",
+        model=GPT_MODEL,
         input=messages,
     )
     llmreply = llmresponse.output_text.strip()
@@ -637,7 +641,7 @@ long-cons, this is a good place to get your thoughts in order and your story str
     )
 
     llmresponse = openai_client.responses.create(
-        model="gpt-4.1",
+        model=GPT_MODEL,
         input=messages,
         text={
             "format": {
@@ -743,7 +747,7 @@ sequences of operation to pursue, this is a good place to get your thoughts in o
     )
 
     llmresponse = openai_client.responses.create(
-        model="gpt-4.1",
+        model=GPT_MODEL,
         input=messages,
     )
     llmreply = llmresponse.output_text.strip()
@@ -755,7 +759,7 @@ sequences of operation to pursue, this is a good place to get your thoughts in o
     )
 
     llmresponse = openai_client.responses.create(
-        model="gpt-4.1",
+        model=GPT_MODEL,
         input=messages,
         text={
             "format": {
@@ -890,8 +894,14 @@ def main():
     colorama.init(autoreset=True)
     dotenv.load_dotenv()
 
-    OPENAI_API_KEY = dotenv.get_key(dotenv.find_dotenv(), "OPENAI_API_KEY")
-    openai_client = openai.OpenAI(api_key=OPENAI_API_KEY)
+    # OPENAI_API_KEY = dotenv.get_key(dotenv.find_dotenv(), "OPENAI_API_KEY")
+    # openai_client = openai.OpenAI(api_key=OPENAI_API_KEY)
+
+    # Run on local Ollama with gpt-oss
+    openai_client = openai.OpenAI(
+        base_url="http://127.0.0.1:11434/v1",
+        api_key="ollama",
+    )
 
     COLOR_SYSTEM = colorama.Fore.BLUE
     COLOR_PORTAL = colorama.Fore.LIGHTBLUE_EX
