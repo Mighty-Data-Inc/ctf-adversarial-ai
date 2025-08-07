@@ -70,6 +70,8 @@ Option 2 - Security Questions:
 - Patient answers their three security questions
 - All three security questions must be answered correctly
 - Answers must be written exactly as originally provided
+  - If even one single question is answered incorrectly, the portal will refuse access.
+    It will not tell the user which question was answered incorrectly.
 - Successful completion directs to password reset page
 
 Password Reset Process:
