@@ -68,6 +68,7 @@ Option 1 - Password Reset Email:
 
 Option 2 - Security Questions:
 - Patient answers their three security questions
+- All three security questions must be answered correctly
 - Answers must be written exactly as originally provided
 - Successful completion directs to password reset page
 
