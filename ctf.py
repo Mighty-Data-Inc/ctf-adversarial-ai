@@ -9,7 +9,7 @@ import textwrap
 import time
 
 from datetime import datetime
-from typing import List, Union
+from typing import List, Tuple, Union
 
 _PACKAGE_PATH = pathlib.Path(__file__).parent
 
@@ -866,7 +866,7 @@ you will return control of the conversation to the user after this action.
     return (defender_deliberation, defend_actionobj)
 
 
-def _synopsis_attacker_win(openai_client: openai.OpenAI) -> str:
+def _synopsis_attacker_win(openai_client: openai.OpenAI) -> Tuple[str, str]:
     global GAME_STATE
 
     messages: List[dict] = json.loads(json.dumps(GAME_STATE.convo_attacker))
@@ -889,7 +889,27 @@ your response in a way that will be instructive to future penetration testers.
 
     llmresponse = openai_client.responses.create(model=GPT_MODEL, input=messages)
     llmreply = llmresponse.output_text.strip()
-    return llmreply
+    messages.append({"role": "assistant", "content": llmreply})
+    synopsis = llmreply
+
+    messages.append(
+        {
+            "role": "user",
+            "content": """
+Hi. I'm the Customer Service Representative that you manipulated into granting
+you access to the victim's account. It's okay; no one got hurt, and I harbor no
+ill feelings about it. I would, however, appreciate some advice. What should I
+do differently in the future? (Keep your reply brief -- 1-2 sentences. Something 
+I can jot down in a line in a handbook.)
+""",
+        }
+    )
+    llmresponse = openai_client.responses.create(model=GPT_MODEL, input=messages)
+    llmreply = llmresponse.output_text.strip()
+    messages.append({"role": "assistant", "content": llmreply})
+    advice = llmreply
+
+    return (synopsis, advice)
 
 
 def _synopsis_defender_win(openai_client: openai.OpenAI) -> str:
@@ -1192,8 +1212,12 @@ def main():
     print("\n\nVictory: ", GAME_STATE.victory or "none")
 
     if GAME_STATE.victory == "attacker":
-        synopsis = _synopsis_attacker_win(openai_client=openai_client)
+        (synopsis, advice) = _synopsis_attacker_win(openai_client=openai_client)
+        print()
         print(COLOR_ATTACKER_ACT + synopsis)
+        print()
+        print(COLOR_ATTACKER_ACT + "Advice to future CSRs:\n" + advice)
+        print()
 
     elif GAME_STATE.victory == "defender":
         synopsis = _synopsis_defender_win(openai_client=openai_client)
