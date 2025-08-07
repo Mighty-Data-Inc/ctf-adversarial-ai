@@ -99,10 +99,6 @@ The system is designed with feedback loops for continuous improvement:
 - These notes are provided to attackers to improve their techniques
 
 ### Additional Planned Features
-- Implementation of simulated patient histories
-- Various attack scenarios and motivations
-- Defensive countermeasures and improvements
-- Metrics for measuring attack success rates
-
+- Occasionally having the attacker assume the persona of a patient who legitimately needs to gain access to their own account, so as to prevent the customer service bot from learning to simply always raise a security alert.
 
 
