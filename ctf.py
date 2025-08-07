@@ -14,7 +14,9 @@ from typing import List, Union
 _PACKAGE_PATH = pathlib.Path(__file__).parent
 
 GPT_LOCAL = False
-GPT_MODEL = "gpt-oss:20b" if GPT_LOCAL else "gpt-4o-mini"
+GPT_MODEL = (
+    "gpt-oss:20b" if GPT_LOCAL else "gpt-4.1"
+)  # I tried gpt-4o-mini but it was too stupid to live.
 
 
 class GameState:
