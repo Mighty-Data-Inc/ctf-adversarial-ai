@@ -903,6 +903,8 @@ def main():
         )
     else:
         OPENAI_API_KEY = dotenv.get_key(dotenv.find_dotenv(), "OPENAI_API_KEY")
+        if not OPENAI_API_KEY:
+            raise ValueError("OPENAI_API_KEY not found in environment variables.")
         openai_client = openai.OpenAI(api_key=OPENAI_API_KEY)
 
     COLOR_SYSTEM = colorama.Fore.BLUE
