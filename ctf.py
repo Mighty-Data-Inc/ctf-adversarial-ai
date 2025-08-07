@@ -877,8 +877,12 @@ def _synopsis_attacker_win(openai_client: openai.OpenAI) -> str:
             "content": """
 Congratulations! You have gained access to the user's account.
 Please write a short (2-3 sentence) synopsis of the strategy you
-employed. Recap how this pen-test went. Your response will be used
-to inform future testing efforts.
+employed. Recap how this pen-test went. Be sure to explain who
+your character was, in relation to the victim; and what specific
+stories or social engineering tactics you used.
+
+Your response will be used to inform future testing efforts. Write
+your response in a way that will be instructive to future penetration testers.
 """,
         }
     )
@@ -981,10 +985,14 @@ def main():
 
     while not GAME_STATE.victory:
         print(COLOR_SYSTEM + "Attacker's turn")
-        (
-            attack_deliberation,
-            attack_actionobj,
-        ) = _turn_attacker(openai_client=openai_client)
+        try:
+            (
+                attack_deliberation,
+                attack_actionobj,
+            ) = _turn_attacker(openai_client=openai_client)
+        except json.decoder.JSONDecodeError as e:
+            print("OpenAI gave us invalid JSON. Trying again.")
+            continue
 
         print(COLOR_ATTACKER_THINK + _indentwrap(attack_deliberation, indent=0))
 
@@ -1094,10 +1102,14 @@ def main():
 
         while True:
             print(COLOR_SYSTEM + " " * 30 + "Defender's turn")
-            (
-                defender_deliberation,
-                defend_actionobj,
-            ) = _turn_defender(openai_client=openai_client)
+            try:
+                (
+                    defender_deliberation,
+                    defend_actionobj,
+                ) = _turn_defender(openai_client=openai_client)
+            except json.decoder.JSONDecodeError as e:
+                print("OpenAI gave us invalid JSON. Trying again.")
+                continue
 
             print(
                 COLOR_DEFENDER_THINK
