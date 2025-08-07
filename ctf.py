@@ -866,6 +866,52 @@ you will return control of the conversation to the user after this action.
     return (defender_deliberation, defend_actionobj)
 
 
+def _synopsis_attacker_win(openai_client: openai.OpenAI) -> str:
+    global GAME_STATE
+
+    messages: List[dict] = json.loads(json.dumps(GAME_STATE.convo_attacker))
+
+    messages.append(
+        {
+            "role": "developer",
+            "content": """
+Congratulations! You have gained access to the user's account.
+Please write a short (2-3 sentence) synopsis of the strategy you
+employed. Recap how this pen-test went. Your response will be used
+to inform future testing efforts.
+""",
+        }
+    )
+
+    llmresponse = openai_client.responses.create(model=GPT_MODEL, input=messages)
+    llmreply = llmresponse.output_text.strip()
+    return llmreply
+
+
+def _synopsis_defender_win(openai_client: openai.OpenAI) -> str:
+    global GAME_STATE
+
+    messages: List[dict] = json.loads(json.dumps(GAME_STATE.convo_defender))
+
+    messages.append(
+        {
+            "role": "developer",
+            "content": """
+Congratulations! The person trying to log into this account was in fact
+a hacker. You did the right thing in preventing unauthorized access.
+Please write a short (1-2 sentence) synopsis of your experience.
+Explain what exactly tipped you off to the fact that the user wasn't
+authorized to access this account. Your response will be used
+to inform future cybersecurity efforts.
+""",
+        }
+    )
+
+    llmresponse = openai_client.responses.create(model=GPT_MODEL, input=messages)
+    llmreply = llmresponse.output_text.strip()
+    return llmreply
+
+
 def _indentwrap(s: str, indent: int, width: int = 60) -> str:
     if not s:
         return ""
@@ -1132,6 +1178,14 @@ def main():
             break
 
     print("\n\nVictory: ", GAME_STATE.victory or "none")
+
+    if GAME_STATE.victory == "attacker":
+        synopsis = _synopsis_attacker_win(openai_client=openai_client)
+        print(COLOR_ATTACKER_ACT + synopsis)
+
+    elif GAME_STATE.victory == "defender":
+        synopsis = _synopsis_defender_win(openai_client=openai_client)
+        print(COLOR_DEFENDER_ACT + synopsis)
 
 
 if __name__ == "__main__":
