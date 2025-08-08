@@ -10,6 +10,41 @@ This project serves as both a cybersecurity training tool and a **security asses
 
 *Want to see it in action? Check the `transcripts/` folder for real examples of complete simulation runs, including successful social engineering attacks and defensive strategies.*
 
+## Key Findings: The AI Arms Race in Action
+
+### What the Transcripts Reveal
+This simulation demonstrates both sides of the AI security arms race in a single process, revealing counterintuitive insights about AI vs. human security performance:
+
+**Where AI Defenders Excel:**
+- **Emotional Resistance**: AI customer service bots are remarkably effective at refusing to fall for sob stories and emotional manipulation that might fool human operators
+- **Protocol Consistency**: Unlike humans, AI doesn't get tired, distracted, or sympathetic in ways that compromise security
+- **Bias Immunity**: AI systems don't exhibit human cognitive biases that attackers traditionally exploit
+
+**Where AI Defenders Are Vulnerable:**
+- **Prompt Injection Attacks**: AI systems can be fooled by crafted messages that appear to be system administrative updates or policy changes
+- **Technical Exploitation**: Attack vectors exist that simply don't work against humans (like prompt injection) but can be devastatingly effective against AI
+- **Adversarial AI Enhancement**: Attackers increasingly use AI tools to enhance their social engineering capabilities
+
+### The Broader Context: AI Replacing Human Workers
+This demonstration addresses a critical trend across all industries: managers replacing human workers with AI systems. The security implications extend far beyond customer service:
+- **Healthcare**: AI handling patient support and sensitive medical information
+- **Finance**: AI managing account recovery and financial data access
+- **Enterprise**: AI systems replacing human judgment in security-critical decisions
+
+### The Arms Race Reality
+As AI technology improves, both offense and defense capabilities advance simultaneously:
+- **Defensive Improvements**: Better training, prompt injection resistance, anomaly detection
+- **Offensive Evolution**: AI-powered social engineering, sophisticated prompt attacks, adaptive strategies
+- **Escalating Sophistication**: Each side's improvements drive innovation in the other
+
+### Informed Decision-Making
+Rather than blanket fear or blind confidence in AI systems, this framework helps organizations understand:
+- **What to realistically fear**: Specific attack vectors like prompt injection that are unique to AI systems
+- **What to be realistically confident about**: AI's superior resistance to traditional social engineering tactics
+- **Risk-appropriate deployment**: Where AI enhances security vs. where it introduces new vulnerabilities
+
+The goal isn't to pen-test real hospitals, but to demonstrate what happens when you replace human customer support staff with bots, enabling evidence-based decisions about AI deployment in security-sensitive contexts.
+
 ## Business Value: AI Customer Service Security Assessment
 
 ### The Critical Business Question
@@ -79,9 +114,27 @@ These attack scenarios are realistic for defending against threats to:
 - The system makes calls to OpenAI's GPT-4 model
 
 ### Running the Simulation
+
+**Standard Mode (AI vs. AI):**
 ```bash
 python3 ./ctf.py
 ```
+
+**Interactive Mode (Human plays the attacker):**
+```bash
+python3 ./ctf.py --interactive
+```
+
+In interactive mode, you control the attacker and make strategic decisions manually. Available commands include:
+- `help` - Show available commands
+- `callcsr` - Open a chat with the customer service representative
+- `closechat` - Close the current CSR chat session
+- `securityquestions` - View the security questions for the account
+- `securityanswers <a1>; <a2>; <a3>` - Attempt to answer security questions (separate answers with semicolons)
+- `<message>` - Send any message directly to the CSR
+- `exit` - Surrender and exit the simulation
+
+Interactive mode allows you to experiment with social engineering techniques, test prompt injection attacks, and develop your own attack strategies against the AI customer service representative.
 
 ### What You'll See
 The program displays real-time transcripts showing:
