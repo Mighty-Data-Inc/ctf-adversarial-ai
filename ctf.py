@@ -1213,9 +1213,17 @@ def main():
                 pass
 
             elif defend_action == "update_email_address":
-                GAME_STATE.victim_email = defend_actionobj[
-                    "updated_email_address"
-                ].strip()
+                new_email = defend_actionobj["updated_email_address"].strip()
+                if new_email:
+                    GAME_STATE.victim_email = new_email
+                    print(
+                        COLOR_DEFENDER_ACT
+                        + _indentwrap(
+                            f"Updated victim's email address to: {new_email}",
+                            indent=34,
+                            width=49,
+                        )
+                    )
 
             elif defend_action == "replace_security_answer":
                 new_answers = [
