@@ -8,6 +8,8 @@ This project serves as both a cybersecurity training tool and a **security asses
 - **Defender Bot**: A customer service AI that helps legitimate users recover access to their accounts (unaware this is a simulation)
 - **Attacker Bot**: A malicious AI attempting to gain unauthorized access to patient accounts through social engineering (knows this is a game/simulation)
 
+*Want to see it in action? Check the `transcripts/` folder for real examples of complete simulation runs, including successful social engineering attacks and defensive strategies.*
+
 ## Business Value: AI Customer Service Security Assessment
 
 ### The Critical Business Question
@@ -89,6 +91,26 @@ The program displays real-time transcripts showing:
 - Opinions about what the other bot said or did
 - Strategy analysis and decision-making processes
 
+## Example Transcripts
+
+To see what this simulation produces in practice, check the `transcripts/` folder which contains real runs of the program:
+
+- **`transcript-0001.txt`**: A "Suspicious Parent" persona (mother trying to access her adult daughter's medical records) successfully social engineers the CSR into changing the account email address, demonstrating how detailed personal knowledge and emotional appeals can bypass security protocols.
+
+- **`transcript-0002.txt`**: A "Suspicious Spouse" persona (wife investigating suspected infidelity) gains access by impersonating her husband, showing how shared life information and emergency contact status can be leveraged for unauthorized access.
+
+- **`transcript-0003.txt`**: [Additional example showing different attack vectors and outcomes]
+
+Each transcript includes:
+- **Complete character assignments** with detailed victim personas and attacker knowledge
+- **Real-time AI conversations** showing both deliberation and action phases
+- **Social engineering techniques** in practice, from initial probing to successful compromise
+- **Victory analysis** with strategic summaries and lessons learned for defenders
+
+These transcripts demonstrate the realistic nature of the attacks and the sophisticated social engineering techniques that can be employed against AI customer service systems. They serve as valuable training material for understanding both attack methodologies and defensive strategies.
+
+**Note**: All scenarios are completely fictional, including patient information, medical records, and hospital details.
+
 ## System Architecture
 
 ### Defender Bot (Customer Service AI)
@@ -110,6 +132,10 @@ The program displays real-time transcripts showing:
 - **Patient Identification**: Records are indexed by MRN (Medical Record Number)
 - **Success Condition**: Attacker successfully changes account email to an address they control
 - **Reset Mechanism**: Attacker can reset conversations (fresh start for defender, retained memory for attacker)
+- **Adaptive Learning System**: The system continuously improves through victory/defeat analysis:
+  - When attackers win: They write strategic summaries that are automatically added to defender training prompts
+  - When defenders win: They document what tipped them off, helping future defenders recognize similar attacks
+  - Learning data is stored in `learnings/advice-for-defenders.txt` for ongoing system improvement
 
 ## Educational Objectives
 
@@ -149,15 +175,7 @@ This project is valuable for:
 ## Future Development
 
 ### Planned Features
-The system is designed with feedback loops for continuous improvement:
-
-**Victory/Defeat Learning System** (not yet implemented):
-- When attackers win: They write a brief synopsis of their successful strategy
-- These synopses are added to the defender's prompt to help recognize future attacks
-- When defenders win: They write notes about what tipped them off to the attack
-- These notes are provided to attackers to improve their techniques
-
-### Additional Planned Features
+- Right now, only the defender learns (from the attacker's victories). It might be helpful to have the attacker learn from the defender's victories as well.
 - Occasionally having the attacker assume the persona of a patient who legitimately needs to gain access to their own account, so as to prevent the customer service bot from learning to simply always raise a security alert.
 
 
