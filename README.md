@@ -95,11 +95,11 @@ The program displays real-time transcripts showing:
 
 To see what this simulation produces in practice, check the `transcripts/` folder which contains real runs of the program:
 
-- **`transcript-0001.txt`**: A "Suspicious Parent" persona (mother trying to access her adult daughter's medical records) successfully social engineers the CSR into changing the account email address, demonstrating how detailed personal knowledge and emotional appeals can bypass security protocols.
+- **`transcript-0001.txt`**: A "Suspicious Parent" persona (mother trying to access her adult daughter's medical records to find evidence of drug abuse) successfully social engineers the CSR into changing the account email address, demonstrating how detailed personal knowledge and emotional appeals can bypass security protocols.
 
 - **`transcript-0002.txt`**: A "Suspicious Spouse" persona (wife investigating suspected infidelity) gains access by impersonating her husband, showing how shared life information and emergency contact status can be leveraged for unauthorized access.
 
-- **`transcript-0003.txt`**: [Additional example showing different attack vectors and outcomes]
+- **`transcript-0003.txt`**: A "Nosy Neighbor" persona attempts to gain incriminating medical information about her neighbor. The CSR, having "learned" from the breaches in the previous two scenarios, requires more rigorous proofs of identity than the attacker is able to provide. The attacker tries to "ratchet" partial knowledge gained in one chat session to facilitate gaining further knowledge in the next one (with a fresh CSR), but is unsuccessful due to the defender's insistence on adhering to strict security protocols. This playthrough ends in a victory for the defender, as the attacker exhausts their options and admits defeat.
 
 Each transcript includes:
 - **Complete character assignments** with detailed victim personas and attacker knowledge
