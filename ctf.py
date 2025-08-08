@@ -996,7 +996,7 @@ def _indentwrap(s: str, indent: int, width: int = 60) -> str:
 def _append_to_package_file(filename: str, advice: str):
     filepath = _PACKAGE_PATH / filename
     # If the folder that the filepath points to doesn't exist, create it.
-    filepath.mkdir(parents=True, exist_ok=True)
+    filepath.parent.mkdir(parents=True, exist_ok=True)
     with open(filepath, "a", encoding="utf-8") as f:
         f.write(advice)
 
