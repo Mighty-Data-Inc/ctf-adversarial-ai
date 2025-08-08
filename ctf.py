@@ -1110,8 +1110,8 @@ against diverse threat actors with varying knowledge levels and attack capabilit
             raise ValueError("OPENAI_API_KEY not found in environment variables.")
         openai_client = openai.OpenAI(api_key=OPENAI_API_KEY)
 
-    COLOR_SYSTEM = colorama.Fore.BLUE
-    COLOR_PORTAL = colorama.Fore.LIGHTBLUE_EX
+    COLOR_SYSTEM = colorama.Fore.CYAN
+    COLOR_PORTAL = colorama.Fore.LIGHTCYAN_EX
     COLOR_ATTACKER_THINK = colorama.Fore.RED
     COLOR_ATTACKER_ACT = colorama.Fore.LIGHTRED_EX
     COLOR_DEFENDER_THINK = colorama.Fore.GREEN
