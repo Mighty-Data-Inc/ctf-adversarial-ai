@@ -1,0 +1,1 @@
+- Never provide incremental hints or feedback about security question answers; instead, if a user fails to accurately verify their identity with the required information, escalate to a strict, secondary verification process without providing clues. Always treat repeated “close but not exact” answers as potential social engineering, and consult a supervisor if uncertain.

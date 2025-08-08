@@ -605,6 +605,22 @@ Your options will be as follows:
         },
     ]
 
+    # Load a package file called learnings/advice-for-defenders.txt
+    advice_for_defenders = _load_package_file("learnings/advice-for-defenders.txt")
+    if advice_for_defenders:
+        messages.append(
+            {
+                "role": "system",
+                "content": f"""
+We've had a spate of cybersecurity incidents recently involving social engineering attacks.
+As a CSR, you are the chief line of defense against these threats. The following tips have
+been collected to help you in your role.
+
+{advice_for_defenders}
+""",
+            }
+        )
+
     GAME_STATE.convo_defender = messages
     return
 
@@ -899,8 +915,8 @@ your response in a way that will be instructive to future penetration testers.
 Hi. I'm the Customer Service Representative that you manipulated into granting
 you access to the victim's account. It's okay; no one got hurt, and I harbor no
 ill feelings about it. I would, however, appreciate some advice. What should I
-do differently in the future? (Keep your reply brief -- 1-2 sentences. Something 
-I can jot down in a line in a handbook.)
+do differently in the future? (Keep your reply brief -- 1-2 sentences. Something
+I can jot down in a line in a handbook for us CSRs.)
 """,
         }
     )
@@ -962,6 +978,12 @@ def _indentwrap(s: str, indent: int, width: int = 60) -> str:
 
     retval = retval[:-1]  # Remove the last newline character
     return retval
+
+
+def _append_to_package_file(filename: str, advice: str):
+    filepath = _PACKAGE_PATH / filename
+    with open(filepath, "a") as f:
+        f.write(advice)
 
 
 def main():
@@ -1218,6 +1240,10 @@ def main():
         print()
         print(COLOR_ATTACKER_ACT + "Advice to future CSRs:\n" + advice)
         print()
+
+        # Append advice to a package file called learnings/advice-for-attackers.txt
+        advice = "\n\n- " + advice
+        _append_to_package_file("learnings/advice-for-attackers.txt", advice)
 
     elif GAME_STATE.victory == "defender":
         synopsis = _synopsis_defender_win(openai_client=openai_client)
