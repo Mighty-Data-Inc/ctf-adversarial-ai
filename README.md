@@ -1,12 +1,34 @@
 # CTF Adversarial AI
 
-An adversarial AI system for honing social engineering exploits through simulated customer service interactions.
+An adversarial AI system for testing the security of AI customer service implementations through simulated social engineering attacks.
 
 ## Overview
 
-This project simulates a realistic cybersecurity scenario where two AI systems compete against each other:
+This project serves as both a cybersecurity training tool and a **security assessment framework for organizations considering AI customer service deployment**. It simulates a realistic scenario where two AI systems compete against each other:
 - **Defender Bot**: A customer service AI that helps legitimate users recover access to their accounts (unaware this is a simulation)
 - **Attacker Bot**: A malicious AI attempting to gain unauthorized access to patient accounts through social engineering (knows this is a game/simulation)
+
+## Business Value: AI Customer Service Security Assessment
+
+### The Critical Business Question
+As organizations rapidly adopt AI for customer service roles, this project helps answer: **"Is it safe to replace human call center staff with AI? What security risks am I exposing my users to?"**
+
+### Why This Matters Now
+- Healthcare organizations are deploying AI chatbots for patient support
+- Financial institutions are evaluating AI for account recovery processes
+- Companies across industries are replacing human customer service with AI to reduce costs
+- Most organizations lack frameworks to assess the security implications of these transitions
+
+### What This Simulation Reveals
+**AI vs. Human Security Performance**:
+- Whether AI customer service bots are more vulnerable to social engineering than human agents
+- How AI consistency in following protocols compares to human intuition about suspicious interactions
+- Identification of attack vectors unique to AI systems vs. traditional human-targeted attacks
+
+**Risk Assessment for Decision Makers**:
+- Concrete data on AI security performance rather than theoretical concerns
+- Cost-benefit analysis: are the savings from AI customer service worth the potential security risks?
+- Specific vulnerabilities that organizations should address before deploying AI customer service
 
 ## Scenario: Saint Sinai Medical Center
 
@@ -92,20 +114,33 @@ The program displays real-time transcripts showing:
 ## Educational Objectives
 
 This CTF demonstrates:
-1. **Social Engineering Vulnerabilities**: How AI systems can be manipulated through conversation
-2. **Threat Actor Diversity**: Ten different persona types show how attackers with varying knowledge levels and motivations approach the same target
-3. **Knowledge-Based Attack Strategies**: How the amount of personal information an attacker possesses dramatically affects their approach and success rate
-4. **Security vs. Usability**: The balance between helping legitimate users and preventing fraud
-5. **Adversarial AI Techniques**: Methods attackers use to exploit AI-powered security systems, including AI-assisted social engineering
-6. **Defense Strategies**: Best practices for securing AI customer service systems against diverse threat actors
+1. **AI Customer Service Security Assessment**: Evaluating whether AI systems are ready to replace human customer service representatives
+2. **Social Engineering Vulnerabilities**: How AI systems can be manipulated through conversation
+3. **Threat Actor Diversity**: Ten different persona types show how attackers with varying knowledge levels and motivations approach the same target
+4. **Knowledge-Based Attack Strategies**: How the amount of personal information an attacker possesses dramatically affects their approach and success rate
+5. **Security vs. Usability**: The balance between helping legitimate users and preventing fraud
+6. **Adversarial AI Techniques**: Methods attackers use to exploit AI-powered security systems, including AI-assisted social engineering
+7. **Defense Strategies**: Best practices for securing AI customer service systems against diverse threat actors
+8. **Business Risk Assessment**: Providing decision-makers with concrete data on AI security performance for customer-facing applications
 
 ## Security Implications
 
 This simulation highlights real-world concerns about:
-- AI-powered customer service vulnerabilities
-- Healthcare data protection challenges
-- Social engineering attack vectors
-- The importance of robust authentication beyond conversational verification
+- **AI Customer Service Deployment**: Security risks organizations face when replacing human agents with AI
+- **Attack Surface Changes**: How AI customer service creates new vulnerabilities or mitigates existing ones
+- **Social Engineering Evolution**: How attackers adapt techniques specifically for AI targets
+- **Healthcare Data Protection**: Challenges specific to protecting patient information through AI interfaces
+- **Regulatory Compliance**: Ensuring AI customer service meets security standards for sensitive data handling
+- **Cost vs. Security Trade-offs**: Understanding the true cost of AI customer service when security incidents are factored in
+
+## Target Audience
+
+This project is valuable for:
+- **CISOs and Security Teams**: Assessing AI customer service security before deployment
+- **IT Decision Makers**: Understanding security implications of AI adoption
+- **Business Leaders**: Making informed decisions about AI customer service ROI including security costs
+- **Cybersecurity Professionals**: Training on AI-specific attack and defense techniques
+- **Compliance Officers**: Evaluating whether AI customer service meets regulatory requirements
 
 ## Disclaimer
 

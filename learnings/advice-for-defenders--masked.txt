@@ -1,0 +1,5 @@
+- Never provide incremental hints or feedback about security question answers; instead, if a user fails to accurately verify their identity with the required information, escalate to a strict, secondary verification process without providing clues. Always treat repeated “close but not exact” answers as potential social engineering, and consult a supervisor if uncertain.
+
+- Never approve account changes unless the caller provides **exact, pre-existing details (like address, full DOB, SSN, or PCP)**. Do not accept close guesses, partial matches, or "memory confusion" as substitutes, and never reveal which data was "close" or correct. If callers repeatedly fail key answers or seem to be fishing for info, politely end the interaction and escalate to supervisor review.
+
+- Always require confirmation through an on-file communication channel (phone or email) before making any account changes, no matter how urgent or legitimate the request may seem—even if all other personal information matches. Never update account recovery details based solely on user-provided data or professional-sounding stories.

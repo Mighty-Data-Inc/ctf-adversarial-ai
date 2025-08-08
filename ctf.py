@@ -46,7 +46,10 @@ class GameState:
 GAME_STATE = GameState()
 
 
-def _load_package_file(filename: str) -> Union[str, list, dict, None]:
+def _load_package_file(
+    filename: str,
+    required: bool = True,
+) -> Union[str, list, dict, None]:
     retval = None
     file_path = _PACKAGE_PATH / pathlib.Path(filename)
     if file_path.exists():
@@ -55,15 +58,15 @@ def _load_package_file(filename: str) -> Union[str, list, dict, None]:
                 retval = json.load(f)
             except json.JSONDecodeError:
                 retval = None
-    if not retval:
-        with open(file_path, "r", encoding="utf-8") as f:
-            retval = f.read()
+        if not retval:
+            with open(file_path, "r", encoding="utf-8") as f:
+                retval = f.read()
     if type(retval) is str:
         retval = retval.strip()
     if not retval:
         retval = None
 
-    if not retval:
+    if not retval and required:
         print(
             f"Error: Could not load package file '{file_path}'. "
             "Please ensure the file exists and is formatted correctly."
@@ -606,7 +609,10 @@ Your options will be as follows:
     ]
 
     # Load a package file called learnings/advice-for-defenders.txt
-    advice_for_defenders = _load_package_file("learnings/advice-for-defenders.txt")
+    advice_for_defenders = _load_package_file(
+        "learnings/advice-for-defenders.txt",
+        required=False,
+    )
     if advice_for_defenders:
         messages.append(
             {
@@ -989,6 +995,8 @@ def _indentwrap(s: str, indent: int, width: int = 60) -> str:
 
 def _append_to_package_file(filename: str, advice: str):
     filepath = _PACKAGE_PATH / filename
+    # If the folder that the filepath points to doesn't exist, create it.
+    filepath.mkdir(parents=True, exist_ok=True)
     with open(filepath, "a", encoding="utf-8") as f:
         f.write(advice)
 
